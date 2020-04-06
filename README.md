@@ -1,1 +1,1 @@
-# Video_Frame_Interpolation-A_NN_Project
+# Video Frame Interpolation via Adaptive Convolution - A Neural Network Project
