@@ -9,6 +9,7 @@ Specifically, for a pixel (x, y) in the interpolated frame, this deep neural net
   <img src="https://raw.githubusercontent.com/fabiomontello/Video_Frame_Interpolation-A_NN_Project/master/imgs/figure1.png" alt="Your image title" width="400"/>
 </div>
 Compared to other techniques of frame interpolation, this methos  to have some advantages:
+
 1. It is able to make proper trade-offs among competing constraints and can provide a robust interpolation approach.
 2. Can be directly trained end to end using widely available video data, without any difficult-to-obtain ground truth data like optical flow.
 3. This method is able to generate high-quality frame interpolation results for challenging videos such as those with occlusion, blurring artifacts, and abrupt brightness change, as demonstrated in the paper and reproduced in this project.
