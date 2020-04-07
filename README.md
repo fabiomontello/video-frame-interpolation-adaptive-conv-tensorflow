@@ -14,6 +14,7 @@ Compared to other techniques of frame interpolation, this methos  to have some a
 2. Can be directly trained end to end using widely available video data, without any difficult-to-obtain ground truth data like optical flow.
 3. This method is able to generate high-quality frame interpolation results for challenging videos such as those with occlusion, blurring artifacts, and abrupt brightness change, as demonstrated in the paper and reproduced in this project.
 
+### Network architecture
 
 Write here a (brief) report describing, in a self-contained way, the problem the paper was facing, the main technical contribution, and any detail concerning your own re-implementation and simulation.
 
