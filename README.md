@@ -31,5 +31,3 @@ Write here a (brief) report describing, in a self-contained way, the problem the
 Paper link: http://openaccess.thecvf.com/content_cvpr_2017/papers/Niklaus_Video_Frame_Interpolation_CVPR_2017_paper.pdf
 
 Dataset https://www.di.ens.fr/~laptev/actions/
-
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
