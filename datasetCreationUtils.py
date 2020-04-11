@@ -16,7 +16,7 @@ def crop_image(path, cx, cy):
     print('Cannot read: ',path)
     return []
 
-  return img[int(cx-75):int(cx+75), int(cy-75):int(cy+75),:]
+  return img[int(cy-75):int(cy+75), int(cx-75):int(cx+75),:]
 
 # Function which takes every triplet of images in the dataset and extract 25 
 # random patches of 150 x 150. It stores them in a folder that will be then compressed
