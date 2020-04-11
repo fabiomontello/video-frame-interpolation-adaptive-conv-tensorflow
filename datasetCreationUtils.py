@@ -7,22 +7,16 @@ import pandas as pd
 
 #function to crop a square image of 150 x 150 around a given pixel
 def crop_image(path, cx, cy):
+    
+  
   #try to read the image (to make sure it exists)
   try:
-    img = tf.io.read_file(path)
+    img = cv2.imread(path)
   except:
     print('Cannot read: ',path)
-    return tf.cast([], tf.float32)
+    return []
 
-  img = tf.io.decode_image(img, channels=3) # We specify the number of channels to avoid b/w images having just one channel
-
-  try:
-    img = tf.image.crop_to_bounding_box(img, int(cy - 75), int(cx - 75), 150, 150)
-  except:
-    print('error', img.shape, cx, cy)
-  img = tf.cast(img, tf.float32) # Normalize the image to [0.0, 1.0]
-
-  return img
+  return img[int(cx-75):int(cx+75), int(cy-75):int(cy+75),:]
 
 # Function which takes every triplet of images in the dataset and extract 25 
 # random patches of 150 x 150. It stores them in a folder that will be then compressed
@@ -40,7 +34,7 @@ def build_dataset():
       x = np.random.randint(75, sh[1] - 75, NUM_OF_CROPS)
       y = np.random.randint(75, sh[0] - 75, NUM_OF_CROPS)
 
-      for j in range(NUM_OF_CROPS):        
+      for j in range(NUM_OF_CROPS):       
         imgA = crop_image(direc+'im1.png', x[j], y[j])
         imgB = crop_image(direc+'im2.png', x[j], y[j])
         imgC = crop_image(direc+'im3.png', x[j], y[j])
