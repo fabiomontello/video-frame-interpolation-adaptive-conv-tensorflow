@@ -7,9 +7,10 @@ import pandas as pd
 # Global counting of the data
 folder_count = 0
 frame_lab = ['a', 'b', 'c']
-
+PATH = ''
 # For each video in the list, extract some frames
-def extractFromVideos(lst):
+def extractFromVideos(lst, dir_out):
+  PATH = dir_out
   os.mkdir(PATH)
   for elem in lst:
     extractFrames("/content/Hollywood2/AVIClips/"+elem, PATH)
