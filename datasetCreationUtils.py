@@ -62,31 +62,36 @@ def crop_image(path, cx, cy):
 # random patches of 150 x 150. It stores them in a folder that will be then compressed
 # and saves the files path in a pandas dataframe, which will be used later to load 
 # the data in tensorflow
-def build_dataset(): 
+def build_dataset(img_c):
+  random.seed(10)
   data = pd.DataFrame(columns=['frameA', 'frameB','frameC', 'x', 'y'])
+
   idx = 0
-  NUM_OF_CROPS = 25
-  for fold in os.listdir('vimeo_interp_test/target/'):
-    for elem in os.listdir('vimeo_interp_test/target/'+fold):
-      direc = 'vimeo_interp_test/target/'+fold +'/'+elem+'/'
-      sh = cv2.imread(direc+'im1.png').shape[0:2]
 
-      x = np.random.randint(75, sh[1] - 75, NUM_OF_CROPS)
-      y = np.random.randint(75, sh[0] - 75, NUM_OF_CROPS)
+  for i in range(1, img_c + 1):
+    sh = cv2.imread('/content/images/frame'+str(i)+'a.jpg').shape[0:2]
+    #print(sh)
+    x = np.random.randint(75, sh[1] - 75, 25)
+    y = np.random.randint(75, sh[0] - 75, 25)
+    #print(sh[1])
+    for j in range(len(x)):
 
-      for j in range(NUM_OF_CROPS):       
-        imgA = crop_image(direc+'im1.png', x[j], y[j])
-        imgB = crop_image(direc+'im2.png', x[j], y[j])
-        imgC = crop_image(direc+'im3.png', x[j], y[j])
+      imgA = crop_image('./images/frame'+str(i)+'a.jpg', x[j], y[j])
+      imgB = crop_image('./images/frame'+str(i)+'b.jpg', x[j], y[j])
+      imgC = crop_image('./images/frame'+str(i)+'c.jpg', x[j], y[j])
 
-        path = './crops_data/'+str(idx)+'/'
+      if(imgB.shape != (0,) and imgC.shape != (0,)):
+        
+        path = './crops/'+str(idx)+'/'
         os.makedirs(path, exist_ok=True)
         cv2.imwrite(path +'a.jpg', np.float32(imgA))
         cv2.imwrite(path +'b.jpg', np.float32(imgB))
         cv2.imwrite(path +'c.jpg',  np.float32(imgC))
-
         data.loc[idx] = ['./crops/'+str(idx)+'/a.jpg','./crops/'+str(idx)+'/b.jpg', './crops/'+str(idx)+'/c.jpg', x[j], y[j]]
-        idx +=1
-        if(idx%1000 == 0):
-          print(idx)
+        #df = df.append({'A': i}, ignore_index=True)
+        idx += 1
+
+    if(i%1000 == 0):
+      print(i)
+
   return data
